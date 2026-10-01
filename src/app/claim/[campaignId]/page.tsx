@@ -1,0 +1,11 @@
+"use client";
+
+import Link from "next/link";
+import { use, useState } from "react";
+
+export default function ClaimPage({ params }: PageProps<"/claim/[campaignId]">) {
+  const { campaignId } = use(params);
+  const [connected, setConnected] = useState(false);
+  const [claimed, setClaimed] = useState(false);
+  return <main className="grid min-h-screen place-items-center bg-[#09090d] px-5 text-[#f7f4ed]"><section className="w-full max-w-lg rounded-3xl border border-white/10 bg-[#121218] p-7 shadow-2xl sm:p-10"><Link href="/" className="text-sm text-white/50 hover:text-white">← Midnight Token Studio</Link><div className="mt-10"><span className="rounded-full bg-[#b8f563]/15 px-3 py-1 text-xs font-bold tracking-wider text-[#d8ff9b]">ACTIVE CAMPAIGN</span><h1 className="mt-5 text-3xl font-semibold tracking-tight">FLUFF Community Drop</h1><p className="mt-2 text-white/50">A community reward campaign on Midnight.</p></div><div className="mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-2xl bg-white/10"><div className="bg-[#121218] p-4"><p className="text-xs uppercase tracking-wider text-white/40">Reward</p><p className="mt-2 font-semibold">1,000 FLUFF</p></div><div className="bg-[#121218] p-4"><p className="text-xs uppercase tracking-wider text-white/40">Claims</p><p className="mt-2 font-semibold">623 / 1,000</p></div></div><div className="mt-7 rounded-xl border border-white/10 p-4 text-sm"><p className="font-medium">Requirements</p><p className="mt-2 text-white/55">Hold at least 5,000 NIGHT for 30 days.</p><p className="mt-2 text-xs text-white/35">Eligibility verification will be provided by the campaign verifier on testnet.</p></div>{connected ? <div className="mt-6"><div className="mb-4 flex items-center gap-2 text-sm text-[#b8f563]"><span>✓</span> Wallet eligible</div><button onClick={() => setClaimed(true)} disabled={claimed} className="w-full rounded-xl bg-[#b8f563] py-3 text-sm font-bold text-[#12170b] disabled:opacity-60">{claimed ? "Claim prepared for wallet approval" : "Claim 1,000 FLUFF"}</button></div> : <button onClick={() => setConnected(true)} className="mt-6 w-full rounded-xl bg-[#b8f563] py-3 text-sm font-bold text-[#12170b]">Connect wallet to claim</button>}<p className="mt-5 text-center text-xs text-white/35">Campaign: {campaignId}. You approve every transaction in your wallet.</p></section></main>;
+}
